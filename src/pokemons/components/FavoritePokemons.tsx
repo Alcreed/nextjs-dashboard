@@ -1,14 +1,18 @@
 'use client'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAppSelector } from "@/store"
 import { IoHeartOutline } from "react-icons/io5"
 
 import { PokemonGrid } from "./PokemonGrid"
 
 export const FavoritePokemons = () => {
-  const favoritePokemons = useAppSelector(state => Object.values(state.pokemons))
-  const [pokemons, setPokemons] = useState(favoritePokemons);
+  const favoritePokemons = useAppSelector(state => Object.values(state.pokemons.favorites))
+  // const [pokemons, setPokemons] = useState(favoritePokemons);
+
+  // useEffect(() => {
+  //   setPokemons(favoritePokemons)
+  // }, [favoritePokemons]);
 
   return (
     <div className="flex flex-col">
@@ -16,8 +20,8 @@ export const FavoritePokemons = () => {
       
       {/* <PokemonGrid pokemons={favoritePokemons} /> */}
       {
-        pokemons.length > 0
-        ? <PokemonGrid pokemons={pokemons} />
+        favoritePokemons.length > 0
+        ? <PokemonGrid pokemons={favoritePokemons} />
         : <NoFavorites />
       }
     </div>
